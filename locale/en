@@ -1,0 +1,15 @@
+next=Next »
+
+id.invalid=Invalid Quiz ID
+id.missing=Quiz ID missing
+
+finish=Quiz Finished
+finish.thanks=Thanks for doing this Quiz
+finished=Finished
+
+answer.missing=No Answer Selected
+answer.wrong=Answer is wrong
+
+quiz=Quiz
+
+error=Error

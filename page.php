@@ -8,7 +8,7 @@ function jumbo() {
   return $e;
 }
 function pageError($err) {
-  $err="ERROR: $err";
+  $err=l("error").": $err";
   $GLOBALS["h"]->setTitle($err);
   $e=jumbo();
   $legend=$GLOBALS["h"]->html->createElement("legend");
@@ -23,7 +23,7 @@ function reload() {
 }
 if (!isset($_COOKIE["quizid"])) {
   if (!isset($_GET["id"])) {
-    pageError("No Quiz ID set");
+    pageError(l("id.missing"));
   }
 }
 $id=$_COOKIE["quizid"];
@@ -33,7 +33,7 @@ if (isset($_GET["id"])) {
   reload();
 }
 if (!isset($q[$id])) {
-  pageError("Invalid Quiz ID");
+  pageError(l("id.invalid"));
 } else {
   $qq=$q[$id];
   $e=jumbo();
@@ -60,9 +60,15 @@ if (!isset($q[$id])) {
     }
     $quiz->apply($h->html,$e);
   } else if (isset($qq["q"][$behind])) {
-    pageError("Quiz Finished");
+    $h->setTitle(l("quiz")." ".$qq["name"]." ".l("finished"));
+    $l=$h->html->createElement("legend");
+    applyText($l,l("finish"));
+    $p=$h->html->createElement("span");
+    applyText($p,l("finish.thanks"));
+    $e->appendChild($l);
+    $e->appendChild($p);
   } else {
-    pageError("Cheater");
+    pageError("-.-");
   }
   $h->body->appendChild($e);
 }

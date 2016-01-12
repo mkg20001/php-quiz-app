@@ -21,11 +21,11 @@ class Quiz
 
   public function solve($key) {
     if ($key==null) {
-      $this->err="No Answer Selected";
+      $this->err=l("answer.missing");
     } else if ($this->ok==$key) {
       return true;
     } else {
-      $this->err="Answer is wrong";
+      $this->err=l("answer.wrong");
     }
     return false;
   }
@@ -76,7 +76,7 @@ class Quiz
     $submit->setAttribute("value","true");
     $submit->setAttribute("name","send");
     $submit->setAttribute("class","btn btn-default");
-    applyText($submit,"Next »");
+    applyText($submit,l("next"));
 
     $hdiv->appendChild($submit);
 

@@ -1,0 +1,15 @@
+next=Weiter »
+
+id.invalid=Fehlerhafte Quiz ID
+id.missing=Quiz ID fehlt
+
+finish=Quiz Fertiggestellt
+finish.thanks=Danke das du dieses Quiz gemacht hast
+finished=Fertiggestellt
+
+answer.missing=Keine Antwort ausgewählt
+answer.wrong=Antwort ist falsch
+
+quiz=Quiz
+
+error=Fehler
