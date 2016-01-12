@@ -5,7 +5,7 @@ id.missing=Quiz ID fehlt
 
 finish=Quiz Fertiggestellt
 finish.thanks=Danke das du dieses Quiz gemacht hast
-finished=Fertiggestellt
+finished=ist fertiggestellt
 
 answer.missing=Keine Antwort ausgewählt
 answer.wrong=Antwort ist falsch

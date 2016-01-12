@@ -11,13 +11,16 @@ Lines with * start a new quiz
 
 Characters after | are the id
 
+~ defines the Callback (CLI)
+
 ; = Start a new Question
 
-? = splits questions and answers
+? = splits question and answers
 
 | = new answer
 
 } = this answer is true (can be multiple choise)
+
 
 Example:
 ```
