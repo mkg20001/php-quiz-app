@@ -38,7 +38,7 @@ if (file_exists("questions.config")) {
         break;
     }
   }
-  var_dump($a);
+  $GLOBALS["qqq"]=$a;
 } else {
   die("Please create questions.config");
 }
