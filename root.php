@@ -4,4 +4,5 @@ function applyText($el,$text) {
 }
 include("./html.php");
 include("./elements.php");
+include("./parser.php");
 ?>
