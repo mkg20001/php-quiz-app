@@ -11,7 +11,9 @@ Lines with * start a new quiz
 
 Characters after | are the id
 
-~ defines the Callback (CLI)
+~ defines the Callback (CLI) ($UUID is being replaced with the UUID used)
+
+$ settings max. errors|max. errors per question
 
 ; = Start a new Question
 
@@ -26,4 +28,6 @@ Example:
 ```
 *Quiz Title|ID
 ;Question?answer1|answer2}|answer3
+~echo "true" ./completed$UUID
+$ 2|5
 ```

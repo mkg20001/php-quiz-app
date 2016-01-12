@@ -16,6 +16,12 @@ if (file_exists("questions.config")) {
         $curid=0;
 
         break;
+      case "~":
+        $a[$cur]["c"]=$p;
+        break;
+      case "$":
+        $a[$cur]["s"]=explode("|",$p);
+        break;
       case ";":
         $t=array();
         $qa=explode("?",$p);

@@ -7,6 +7,7 @@ class Quiz
   public $qtitle;
   public $ok;
   public $err=false;
+  public $errtype=false;
 
   public function __construct($title,$qtitle) {
     $this->title=$title;
@@ -21,10 +22,12 @@ class Quiz
 
   public function solve($key) {
     if ($key==null) {
+      $this->errtype="missing";
       $this->err=l("answer.missing");
     } else if ($this->ok==$key) {
       return true;
     } else {
+      $this->errtype="wrong";
       $this->err=l("answer.wrong");
     }
     return false;

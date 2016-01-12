@@ -2,10 +2,16 @@ next=Next »
 
 id.invalid=Invalid Quiz ID
 id.missing=Quiz ID missing
+uuid.invalid=Your Quiz Code is wrong
+uuid.missing=You don´t have permissions to access this Quiz
+uuid.quiz.wrong=This Quiz Code is not for this Quiz
+uuid.used=You have already used this Quiz Code and completed the Quiz or it was canceled due to the error limit
 
-finish=Quiz Finished
-finish.thanks=Thanks for doing this Quiz
-finished=is finished
+error.limit=Error Limit exceed
+
+finish=Quiz Completed
+finish.thanks=Thanks for completing this Quiz
+finished=is completed
 
 answer.missing=No Answer Selected
 answer.wrong=Answer is wrong

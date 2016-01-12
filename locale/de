@@ -2,9 +2,15 @@ next=Weiter »
 
 id.invalid=Fehlerhafte Quiz ID
 id.missing=Quiz ID fehlt
+uuid.invalid=Dein Quiz Code ist fehlerhaft
+uuid.missing=Du hast auf dieses Quiz keinen Zugriff
+uuid.quiz.wrong=Dieser Quiz Code ist nicht für dieses Quiz
+uuid.used=Du hast diesen Quiz Code bereits benutzt und das Quiz entweder geschafft oder es wurde beendet aufgrund der Fehleranzahl
+
+error.limit=Fehler Limit überschritten
 
 finish=Quiz Fertiggestellt
-finish.thanks=Danke das du dieses Quiz gemacht hast
+finish.thanks=Danke das du dieses Quiz fertiggestellt hast
 finished=ist fertiggestellt
 
 answer.missing=Keine Antwort ausgewählt
