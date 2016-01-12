@@ -1,20 +1,5 @@
 <?php
 $q=$GLOBALS["qqq"];
-/*$q=new Quiz("Questions about something","What is this for an app?");
-$q->add("Cake");
-$q->add("PHP Quiz App",null,true);
-$e=$h->html->createElement("div");
-$e->setAttribute("class","jumbotron");
-$h->body->appendChild($e);
-$q->apply($h->html,$e);
-if (isset($_POST["send"])) {
-  if (isset($_POST["answer"])) {
-    echo "Answered: ".$_POST["answer"];
-  } else {
-    echo "NO Answer";
-  }
-  echo "  __ ".$q->solve($_POST["answer"]);
-}*/
 $h=new HTML();
 $GLOBALS["h"]=$h;
 function jumbo() {
@@ -32,24 +17,54 @@ function pageError($err) {
   $GLOBALS["h"]->body->appendChild($e);
   die($GLOBALS["h"]->html->saveHTML());
 }
-if (!isset($_GET["id"])) {
-  pageError("No Quiz ID set");
-} else {
+function reload() {
+  header("Location: ./");
+  pageError("Redirect...");
+}
+if (!isset($_COOKIE["quizid"])) {
+  if (!isset($_GET["id"])) {
+    pageError("No Quiz ID set");
+  }
+}
+$id=$_COOKIE["quizid"];
+if (isset($_GET["id"])) {
   $id=$_GET["id"];
-  if (!isset($q[$id])) {
-    pageError("Invalid Quiz ID");
+  setCookie("quizid",$id,time()+3600);
+  reload();
+}
+if (!isset($q[$id])) {
+  pageError("Invalid Quiz ID");
+} else {
+  $qq=$q[$id];
+  $e=jumbo();
+  $pcp="progress".$id;
+  if (isset($_COOKIE[$pcp])) {
+    $progress=$_COOKIE[$pcp];
   } else {
-    $qq=$q[$id];
-    $e=jumbo();
-    $q=$qq["q"][0];
+    setCookie($pcp,0,time()+3600*48);
+    $progress=0;
+  }
+  $behind=$progress-1;
+  if (isset($qq["q"][$progress])) {
+    $q=$qq["q"][$progress];
     $h->setTitle($qq["name"].": ".$q["q"]);
     $quiz=new Quiz($qq["name"],$q["q"]);
     foreach ($q["a"] as $key => $v) {
       $quiz->add($v["name"],$key,$v["right"]);
     }
+    if (isset($_POST["send"])) {
+      if ($quiz->solve($_POST["answer"])) {
+        setCookie($pcp,$progress+1,time()+3600*48);
+        reload();
+      }
+    }
     $quiz->apply($h->html,$e);
-    $h->body->appendChild($e);
+  } else if (isset($qq["q"][$behind])) {
+    pageError("Quiz Finished");
+  } else {
+    pageError("Cheater");
   }
+  $h->body->appendChild($e);
 }
 
 echo $h->html->saveHTML();

@@ -6,6 +6,7 @@ class Quiz
   public $title;
   public $qtitle;
   public $ok;
+  public $err=false;
 
   public function __construct($title,$qtitle) {
     $this->title=$title;
@@ -19,7 +20,14 @@ class Quiz
   }
 
   public function solve($key) {
-    return ($this->ok==$key);
+    if ($key==null) {
+      $this->err="No Answer Selected";
+    } else if ($this->ok==$key) {
+      return true;
+    } else {
+      $this->err="Answer is wrong";
+    }
+    return false;
   }
 
   public function apply($html,$el) {
@@ -31,6 +39,18 @@ class Quiz
     $e->setAttribute("class","form-horizontal");
     $hdiv=$html->createElement("div");
     $hdiv->setAttribute("class","control-group");
+
+    if ($this->err) {
+      $ediv=$html->createElement("div");
+      $ediv->setAttribute("class","controls");
+      $elabel=$html->createElement("label");
+      $elabel->setAttribute("class","control-label");
+      $elabel->setAttribute("style","color:red;");
+      applyText($elabel,$this->err);
+      $ediv->appendChild($elabel);
+      $e->appendChild($ediv);
+    }
+
     $div=$html->createElement("div");
     $div->setAttribute("class","controls");
     $label=$html->createElement("label");

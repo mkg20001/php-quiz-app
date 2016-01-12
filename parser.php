@@ -30,7 +30,9 @@ if (file_exists("questions.config")) {
             $rr=true;
             $ans=str_replace("}","",$ans);
           }
-          $t["a"][$id]=array("name" => $ans,"right" => $rr);
+          if ($ans!="") {
+            $t["a"][$id]=array("name" => $ans,"right" => $rr);
+          }
           $id++;
         }
         $a[$cur]["q"][$curid]=$t;
