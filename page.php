@@ -47,7 +47,7 @@ if (isset($_GET["uuid"])) {
 }
 $uu="./uuid/$uuid";
 if (!file_exists($uu)) {
-  pageError("uuid.invalid");
+  pageError(l("uuid.invalid"));
 } else {
   $uuidfile=$uu;
   $uu=file_get_contents($uu);
