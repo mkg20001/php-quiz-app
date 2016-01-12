@@ -5,15 +5,21 @@ class Quiz
   public $right="";
   public $title;
   public $qtitle;
+  public $ok;
 
   public function __construct($title,$qtitle) {
     $this->title=$title;
     $this->qtitle=$qtitle;
   }
 
-  public function add($text,$key=null) {
+  public function add($text,$key=null,$right=false) {
     if ($key==null) {$key=sizeof($this->answers);}
+    if ($right) {$this->ok=$key;}
     $this->answers[$key]=$text;
+  }
+
+  public function solve($key) {
+    return ($this->ok==$key);
   }
 
   public function apply($html,$el) {
@@ -44,6 +50,16 @@ class Quiz
       $div->appendChild($ad);
     }
     $hdiv->appendChild($div);
+
+    $submit=$html->createElement("button");
+    $submit->setAttribute("type","submit");
+    $submit->setAttribute("value","true");
+    $submit->setAttribute("name","send");
+    $submit->setAttribute("class","btn btn-default");
+    applyText($submit,"Next »");
+
+    $hdiv->appendChild($submit);
+
     $e->appendChild($hdiv);
     $el->appendChild($e);
   }
