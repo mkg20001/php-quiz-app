@@ -1,4 +1,8 @@
 <?php
+function applyText($el,$text) {
+  $el->appendChild($el->ownerDocument->createTextNode($text));
+}
+
 class HTML
 {
   public $html;
