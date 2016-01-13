@@ -96,7 +96,7 @@ if (!isset($q[$id])) {
   } else if (isset($qq["q"][$behind])) {
     $h->setTitle(l("quiz")." ".$qq["name"]." ".l("finished"));
     $l=$h->html->createElement("legend");
-    applyText($l,l("finish"));
+    applyText($l,l("finish").": ".$qq["name"]);
     $p=$h->html->createElement("span");
     applyText($p,l("finish.thanks"));
     $e->appendChild($l);
