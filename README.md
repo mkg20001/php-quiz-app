@@ -28,7 +28,7 @@ Example:
 ```
 *Quiz Title|ID
 ;Question?answer1|answer2}|answer3
-~echo "true" ./completed$UUID
+~echo "$DATA" > ./completed$UUID
 $ 2|5
 ```
 
