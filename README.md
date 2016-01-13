@@ -35,7 +35,7 @@ $ 2|5
 ##UUID System
 To create a UUID simply write the following in a file located in ```./uuid```
 ```
-
+Empty Line
 QuizID
 additional data (string)
 ```
