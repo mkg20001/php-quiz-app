@@ -26,19 +26,6 @@ if (!isset($_COOKIE["quizuuid"])) {
     pageError(l("uuid.missing"));
   }
 }
-if (!isset($_COOKIE["quizid"])) {
-  if (!isset($_GET["id"])) {
-    pageError(l("id.missing"));
-  }
-}
-$id=$_COOKIE["quizid"];
-if (isset($_GET["id"])) {
-  $id=$_GET["id"];
-  setCookie("quizid",$id,time()+3600);
-  if (!isset($_GET["uuid"])) {
-    reload();
-  }
-}
 $uuid=$_COOKIE["quizuuid"];
 if (isset($_GET["uuid"])) {
   $uuid=$_GET["uuid"];
@@ -51,29 +38,34 @@ if (!file_exists($uu)) {
 } else {
   $uuidfile=$uu;
   $uu=file_get_contents($uu);
-  switch($uu) {
+  $uuu=explode("\n",$uu);
+  switch($uuu[0]) {
     case "sent":
       pageError(l("uuid.used"));
       break;
     case "":
-      file_put_contents($uuidfile,"0|0");
+      file_put_contents($uuidfile,"0|0|0|".$uuu[1]."|".$uuu[2]);
       break;
   }
 }
+
+$uu2=explode("|",file_get_contents($uuidfile));
+$uu=array();
+foreach($uu2 as $k => $i) {
+  if (is_numeric($i)) {
+    $uu[$k]=intval($i,10);
+  } else {
+    $uu[$k]=$i;
+  }
+}
+$id=$uu[3];
+
 if (!isset($q[$id])) {
   pageError(l("id.invalid"));
 } else {
-  $uu=explode("|",file_get_contents($uuidfile));
   $qq=$q[$id];
   $e=jumbo();
-  $pcp="progress".$id;
-  $ccp="callback".$id;
-  if (isset($_COOKIE[$pcp])) {
-    $progress=$_COOKIE[$pcp];
-  } else {
-    setCookie($pcp,0,time()+3600*48);
-    $progress=0;
-  }
+  $progress=$uu[2];
   $behind=$progress-1;
   if (isset($qq["q"][$progress])) {
     $q=$qq["q"][$progress];
@@ -84,15 +76,15 @@ if (!isset($q[$id])) {
     }
     if (isset($_POST["send"])) {
       if ($quiz->solve($_POST["answer"])) {
-        setCookie($pcp,$progress+1,time()+3600*48);
-        $uu[1]==0;
-        file_put_contents($uuidfile,"$uu[0]|$uu[1]");
+        $uu[2]=$progress+1;
+        $uu[1]=0;
+        file_put_contents($uuidfile,implode($uu,"|"));
         reload();
       } else {
         if ($quiz->errtype=="wrong") {
           $uu[0]=$uu[0]+1;
           $uu[1]=$uu[1]+1;
-          file_put_contents($uuidfile,"$uu[0]|$uu[1]");
+          file_put_contents($uuidfile,implode($uu,"|"));
           if (($uu[0]==$qq["s"][0]) or ($uu[1]==$qq["s"][1])) {
             file_put_contents($uuidfile,"sent");
             pageError(l("error.limit"));
@@ -109,11 +101,8 @@ if (!isset($q[$id])) {
     applyText($p,l("finish.thanks"));
     $e->appendChild($l);
     $e->appendChild($p);
-    if (!isset($_COOKIE[$ccp])) {
-      exec(str_replace("\$UUID",$uuid,$qq["c"]));
-      setCookie($ccp,"true",time()+3600*48);
-      file_put_contents($uuidfile,"sent");
-    }
+    exec(str_replace(["\$UUID","\$DATA"],[$uuid,$uu[4]],$qq["c"]));
+    file_put_contents($uuidfile,"sent");
   } else {
     pageError("-.-");
   }
