@@ -1,0 +1,47 @@
+<!doctype html>
+<html>
+<head>
+  <title>$TITLE</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+  <style>
+    .jumbotron {
+      margin-top:auto;
+      color: white !important;
+      background-color: #42A5F5;
+    }
+    legend {
+      color: #eeeeee !important;
+    }
+    center {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+    body {
+      background: #42A5F5 url("./layouts/bg/bg.jpg");
+    }
+    .btn-primary {
+      background-color: #42A5F5;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <center id="inside">
+    </center>
+  </div>
+  <script>
+  $(".btn-default").each(function(i,e) {
+    e=$(e);
+    e.removeClass("btn-default");
+    e.addClass("btn-primary");
+  });
+  </script>
+</body>
+</html>
