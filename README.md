@@ -1,11 +1,11 @@
 # php-quiz-app
-This is a small quiz app to test people if the understood the rules of your server
+A small quiz app written in PHP
 ## Editing
 You can edit the template.html like you want but keep it in Bootstrap style and add the ```id="inside"``` property to the element where the HTML should be written
 ## Usage
 To use it just call it with the UUID located in ```./uuid```: ```/?uuid=1```
 ## questions.config
-The questions.config has a simple Syntax:
+The questions.config has a simple syntax:
 
 Lines with * start a new quiz
 
